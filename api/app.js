@@ -6,6 +6,6 @@ app.get('/', (req, res) => {
   res.send("PET NABIZ'A HOŞ GELDİN !")
 })
 
-app.listen(port, () => {
+app.listen(process.env.PORT || 3000, function(){
   console.log(`Example app listening at http://localhost:${port}`)
-})
+});
