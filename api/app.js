@@ -1,6 +1,7 @@
 const express = require('express')
 const app = express()
-const mysql = require('mysql')
+const db = require('sqlite3');
+const database_file = require('../database.db')
 const port = 3000
 
 app.get('/', (req, res) => {
