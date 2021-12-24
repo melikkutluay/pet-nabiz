@@ -1,0 +1,25 @@
+{
+  "name": "pet-nabiz",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon ./api/app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/melikkutluay/pet-nabiz.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/melikkutluay/pet-nabiz/issues"
+  },
+  "homepage": "https://github.com/melikkutluay/pet-nabiz#readme",
+  "dependencies": {
+    "express": "^4.17.2",
+    "knex": "^0.95.15",
+    "nodemon": "^2.0.15"
+  }
+}
