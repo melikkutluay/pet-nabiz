@@ -1,1 +1,1 @@
-web: node index.js
+web: nodemon ./api/app.js
