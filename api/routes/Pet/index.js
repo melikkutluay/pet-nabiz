@@ -2,7 +2,7 @@ const express = require('express')
 const router = express()
 const db = require('../../queryBuild')
 
-router.get('/get', async (req, res, next) => {
+router.get('/', async (req, res, next) => {
     try {
         const queryBuilder = new db.exec('Pets')
         let response = await queryBuilder.select('*');
@@ -12,8 +12,7 @@ router.get('/get', async (req, res, next) => {
     }
 })
 
-router.post('/post', async (req, res, next) => {
-    console.log("Post-Pet:",JSON.stringify(req.body));
+router.post('/', async (req, res, next) => {
     try {
         const queryBuilder = new db.exec('Pets')
         console.log("reqbody :",JSON.stringify(req.body));
