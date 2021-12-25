@@ -1,12 +1,12 @@
 const express = require('express')
 const router = express()
+const apicall = require('../../apicall')
 const _ = require('lodash')
 const db = require('../../queryBuild')
 
 router.post('/signIn', async (req, res, next) => {
     try {
-        const queryBuilder = new db.exec('Human')
-        let response = await queryBuilder.select('*').where('Mail', req.body.Mail).where('Password', req.body.Password);
+        let response = await apicall.get(req.body);
         if (_.isEmpty(response)) {
             res.status(400).json(400)
         } else {
