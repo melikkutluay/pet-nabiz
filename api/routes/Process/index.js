@@ -1,7 +1,6 @@
 const express = require('express')
 const router = express()
 const apicall = require('../../apicall')
-const db = require('../../queryBuild')
 
 router.get('/:processId?', async (req, res, next) => {
     try {
