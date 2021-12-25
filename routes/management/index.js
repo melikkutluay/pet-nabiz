@@ -9,7 +9,7 @@ const knex = require('knex')({
     useNullAsDefault: true,
 });
 router.get('/', async (req, res, next) => {
-    let response = await knex('users');
+    let response = await knex('Human');
     res.status(200).json(response)
 })
 
