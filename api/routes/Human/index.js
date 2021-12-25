@@ -3,12 +3,13 @@ const router = express()
 const db = require('../../queryBuild')
 const queryBuilder = new db.exec('Human')
 
-router.get('/:humanId?', async (req, res, next) => {
+router.post('/:humanId?', async (req, res, next) => {
     try {
+        console.log(req.body);
         if (req.params.humanId) {
-            console.log("9 line :",req.body);
-            let response = await queryBuilder.select('*').where('Mail', req.params.humanId && 'Password', req.body.Password);
-            res.status(200).json(response)
+            let response = await queryBuilder.select('*').where('Mail', req.body.Mail).where('Password', req.body.Password);
+            //res.status(200).json(response)
+            res.status(200).json(200)
         } else {
             let response = await queryBuilder.select('*');
             res.status(200).json(response)
