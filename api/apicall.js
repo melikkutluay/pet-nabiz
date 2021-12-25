@@ -1,24 +1,25 @@
 const db = require('../api/queryBuild')
 
 module.exports = {
-    get: async function (req) {
-        const queryBuilder = new db.exec('Human')
-        return await queryBuilder.select('*').where('Mail', req.Mail).where('Password', req.Password);
+    get: async function (tableName, data) {
+        const queryBuilder = new db.exec(tableName)
+        return await queryBuilder.select('*').where(data);
     },
-    post: function (uri, data, auth) {
-        return axios.post(uri, data, auth)
+    post: async function (uri, data) {
+
+        return axios.post(uri, data)
             .then(res => {
                 return res
             })
     },
-    put: function (uri, data, auth) {
+    put: async function (uri, data) {
         return axios.put(uri, data, auth)
             .then(res => {
                 return res
             })
     },
-    delete: function (uri, auth) {
-        return axios.delete(uri, auth)
+    delete: async function (uri) {
+        return axios.delete(uri)
             .then(res => {
                 return res
             })

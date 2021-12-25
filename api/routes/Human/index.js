@@ -6,7 +6,7 @@ const db = require('../../queryBuild')
 
 router.post('/signIn', async (req, res, next) => {
     try {
-        let response = await apicall.get(req.body);
+        let response = await apicall.get('Human', req.body);
         if (_.isEmpty(response)) {
             res.status(400).json(400)
         } else {
