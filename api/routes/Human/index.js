@@ -19,12 +19,22 @@ router.get('/:humanId?', async (req, res, next) => {
 
 router.post('/signIn', async (req, res, next) => {
     try {
-        let response = await apicall.get('Human', req.body);
+        /* let response = await apicall.get('Human', req.body);
         if (_.isEmpty(response)) {
             throw new Error(400);
         } else {
             res.status(200).json(response)
-        }
+        } */
+        res.status(200).json([
+            {
+                "TC": 3453453,
+                "Full_Name": "Ayşe Yılmaz",
+                "Mail": "ayseyilmaz@gmail.com",
+                "Password": "325335frfe",
+                "Phone_Number": 34535534,
+                "Role": "Not Vet"
+            }
+        ])
     } catch (error) {
         next(error)
     }
