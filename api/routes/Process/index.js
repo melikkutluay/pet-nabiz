@@ -17,7 +17,7 @@ router.get('/:processId?', async (req, res, next) => {
     }
 })
 
-router.post('/', (req, res, next) => {
+router.post('/',async (req, res, next) => {
     try {
         let response = await apicall.post('Process', req.body);
         console.log("response :", response);
