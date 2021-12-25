@@ -1,12 +1,16 @@
 const express = require('express')
 const router = express()
-const db = require('../../queryBuild')
-const queryBuilder = new db.exec('Vets')
+const apicall = require('../../apicall')
 
-router.get('/', async (req, res, next) => {
+router.get('/:vetId', async (req, res, next) => {
     try {
-        let response = await queryBuilder.select('*');
-        res.status(200).json(response)
+        if (req.params.vetId) {
+            let response = await apicall.get('Human', { id: req.params.vetId });
+            res.status(200).json(response)
+        } else {
+            let response = await apicall.get('Human', { Role: "Vet"});
+            res.status(200).json(response)
+        }
     } catch (error) {
         next(error)
     }
