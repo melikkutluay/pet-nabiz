@@ -13,6 +13,7 @@ router.get('/', async (req, res, next) => {
 })
 
 router.post('/', async (req, res, next) => {
+    console.log("add_pet_req:",req)
     try {
         const queryBuilder = new db.exec('Pets')
         console.log("reqbody :",JSON.stringify(req.body));

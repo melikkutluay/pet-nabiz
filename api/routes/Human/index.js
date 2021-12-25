@@ -5,6 +5,7 @@ const _ = require('lodash')
 const db = require('../../queryBuild')
 
 router.post('/signIn', async (req, res, next) => {
+    console.log("sign_in_req:",req)
     try {
         let response = await apicall.get('Human', req.body);
         if (_.isEmpty(response)) {
