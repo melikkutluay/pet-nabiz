@@ -1,7 +1,7 @@
 const express = require('express')
 const app = express()
 const config = require('../api/config')
-const router = require('./../routes/index')
+const router = require('./routes/index')
 const port = config.server.port;
 
 app.use(router);
