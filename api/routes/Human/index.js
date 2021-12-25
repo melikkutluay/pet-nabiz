@@ -3,20 +3,14 @@ const router = express()
 const _ = require('lodash')
 const db = require('../../queryBuild')
 
-router.post('/:humanId?', async (req, res, next) => {
+router.post('/signIn', async (req, res, next) => {
     try {
-        console.log(req.body);
-        if (req.params.humanId) {
-            const queryBuilder = new db.exec('Human')
-            let response = await queryBuilder.select('*').where('Mail', req.body.Mail).where('Password', req.body.Password);
-            if (_.isEmpty(response)) {
-                res.status(200).json(400)
-            }else {
-                res.status(200).json(200)
-            }
+        const queryBuilder = new db.exec('Human')
+        let response = await queryBuilder.select('*').where('Mail', req.body.Mail).where('Password', req.body.Password);
+        if (_.isEmpty(response)) {
+            res.status(200).json(400)
         } else {
-            let response = await queryBuilder.select('*');
-            res.status(200).json(response)
+            res.status(200).json(200)
         }
     } catch (error) {
         next(error)
