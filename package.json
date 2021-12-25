@@ -19,6 +19,8 @@
   },
   "homepage": "https://github.com/melikkutluay/pet-nabiz#readme",
   "dependencies": {
+    "body-parser": "^1.19.1",
+    "dotenv": "^10.0.0",
     "express": "^4.17.2",
     "knex": "^0.95.15",
     "nodemon": "^2.0.15",
