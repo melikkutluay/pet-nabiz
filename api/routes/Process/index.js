@@ -1,12 +1,48 @@
 const express = require('express')
 const router = express()
+const apicall = require('../../apicall')
 const db = require('../../queryBuild')
-const queryBuilder = new db.exec('Process')
 
-router.get('/', async (req, res, next) => {
+router.get('/:processId?', async (req, res, next) => {
     try {
-        let response = await queryBuilder.select('*');
-        res.status(200).json(response)
+        if (req.params.processId) {
+            let response = await apicall.get('Process', { Pet_id: req.params.petId });
+            res.status(200).json(response)
+        } else {
+            let response = await apicall.get('Process');
+            res.status(200).json(response)
+        }
+    } catch (error) {
+        next(error)
+    }
+})
+
+router.post('/', (req, res, next) => {
+    try {
+        let response = await apicall.post('Process', req.body);
+        console.log("response :", response);
+        res.status(200).json("Succesful Add Process")
+    } catch (error) {
+        next(error)
+    }
+})
+
+
+router.put('/:processId?', async (req, res, next) => {
+    try {
+        let response = await apicall.put('Process', req.body);
+        console.log("response:", response);
+        res.status(200).json("Succesful Update Process")
+    } catch (error) {
+        next(error)
+    }
+})
+
+router.delete('/:processId', async (req, res, next) => {
+    try {
+        let response = await apicall.delete('Process', { 'id': req.params.processId });
+        console.log("response:", response);
+        res.status(200).json("Succesful Delete Process")
     } catch (error) {
         next(error)
     }
