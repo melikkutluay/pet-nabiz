@@ -1,27 +1,40 @@
 const db = require('../api/queryBuild')
-
+const _ = require('lodash')
 module.exports = {
     get: async function (tableName, data) {
-        const queryBuilder = new db.exec(tableName)
-        return await queryBuilder.select('*').where(data);
+        try {
+            const queryBuilder = new db.exec(tableName)
+            if (_.isUndefined(data)) {
+                return await queryBuilder.select('*');
+            } else {
+                return await queryBuilder.select('*').where(data);
+            }
+        } catch (error) {
+            throw new Error(error)
+        }
     },
-    post: async function (uri, data) {
-
-        return axios.post(uri, data)
-            .then(res => {
-                return res
-            })
+    post: async function (tableName, data) {
+        try {
+            const queryBuilder = new db.exec(tableName)
+            return await queryBuilder.insert(data)
+        } catch (error) {
+            throw new Error(error)
+        }
     },
-    put: async function (uri, data) {
-        return axios.put(uri, data, auth)
-            .then(res => {
-                return res
-            })
+    put: async function (tableName, data) {
+        try {
+            const queryBuilder = new db.exec(tableName)
+            return await queryBuilder.where({ id: data.id }).update(data)
+        } catch (error) {
+            throw new Error(error)
+        }
     },
-    delete: async function (uri) {
-        return axios.delete(uri)
-            .then(res => {
-                return res
-            })
+    delete: async function (tableName, data) {
+        try {
+            const queryBuilder = new db.exec(tableName)
+            return await queryBuilder.where(data).delete()
+        } catch (error) {
+            throw new Error(error)
+        }
     }
 }

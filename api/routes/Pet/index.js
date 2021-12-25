@@ -1,33 +1,46 @@
 const express = require('express')
 const router = express()
-const db = require('../../queryBuild')
+const apicall = require('../../apicall')
 
-router.get('/', async (req, res, next) => {
+router.get('/:petId?', async (req, res, next) => {
     try {
-        const queryBuilder = new db.exec('Pets')
-        let response = await queryBuilder.select('*');
-        res.status(200).json(response)
+        if (req.params.petId) {
+            let response = await apicall.get('Pets', { id: req.params.petId });
+            res.status(200).json(response)
+        } else {
+            let response = await apicall.get('Pets');
+            res.status(200).json(response)
+        }
     } catch (error) {
         next(error)
     }
 })
 
 router.post('/', async (req, res, next) => {
-    console.log("add_pet_req:",req)
     try {
-        const queryBuilder = new db.exec('Pets')
-        console.log("reqbody :",JSON.stringify(req.body));
-        let response = await queryBuilder.insert(req.body);
-        console.log("response:",response);
-        res.status(200).json(response)
+        let response = await apicall.post('Pets', req.body);
+        console.log("response :", response);
+        res.status(200).json("Succesful Add Pet")
     } catch (error) {
         next(error)
     }
 })
 
-router.put('/', async (req, res, next) => {
+router.put('/:petId?', async (req, res, next) => {
     try {
-        console.log("put");
+        let response = await apicall.put('Pets', req.body);
+        console.log("response:", response);
+        res.status(200).json("Succesful Update Pet")
+    } catch (error) {
+        next(error)
+    }
+})
+
+router.delete('/:petId', async (req, res, next) => {
+    try {
+        let response = await apicall.delete('Pets', { 'id': req.params.petId });
+        console.log("response:", response);
+        res.status(200).json("Succesful Delete Pet")
     } catch (error) {
         next(error)
     }
