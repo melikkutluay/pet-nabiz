@@ -35,6 +35,7 @@ router.post('/filter', async (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
     try {
+        console.log("req:",req.body);
         let response = await apicall.post('pet', req.body);
         console.log("response :", response);
         res.status(200).json("Succesful Add Pet")
