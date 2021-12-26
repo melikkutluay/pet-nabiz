@@ -1,5 +1,5 @@
 const config = require('./config')
-const queryClass = require('knex')({
+exports.queryClass = require('knex')({
     client: 'sqlite3',
     connection: {
         filename: config.database
