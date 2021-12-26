@@ -8,7 +8,7 @@ module.exports = {
                 return await queryBuilder.select('*');
             } else {
                 if (_.has(data, 'process_date')) {
-                    return await queryBuilder.whereBetween('process_date', Object.values(data.process_date));
+                    return await queryBuilder.whereBetween('process_date', Object.values(data.process_date)).join('pet', 'pet.id', '=', 'process.pet_id');
                 } else {
                     return await queryBuilder.select('*').where(data);
                 }

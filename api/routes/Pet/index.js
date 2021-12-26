@@ -19,8 +19,6 @@ router.get('/:petId?', async (req, res, next) => {
 
 router.post('/filter', async (req, res, next) => {
     try {
-        console.log("req body :",req.body);
-
         if (_.has(req.body, 'first_time') && _.has(req.body, 'second_time')) {
             let response = await apicall.get('process', {process_date: [req.body.first_time, req.body.second_time]})
             res.status(200).json(response);
