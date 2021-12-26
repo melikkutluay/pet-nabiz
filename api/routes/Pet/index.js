@@ -18,15 +18,13 @@ router.get('/:petId?', async (req, res, next) => {
 
 router.post('/filter', async (req, res, next) => {
     try {
-        /* console.log("reqbody:", req.body);
-        let a = {
-            fist_date: '2021-12-01 00:00:00.000',
-            last_date: '2021-12-31 00:00:00.000'
-        } */
-        let response = await apicall.get('pet', req.body)
+        let body = {
+            process_date: '11.10.2021',
+            process_date: '23.12.2021'
+        }
+        let response = await apicall.get('process', body)
         res.status(200).json(response)
     } catch (error) {
-        console.log("hata alıyosun");
         next(error)
     }
 })
