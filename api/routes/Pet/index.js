@@ -44,7 +44,7 @@ router.post('/', async (req, res, next) => {
 
 router.put('/:petId?', async (req, res, next) => {
     try {
-        let response = await apicall.put('Pets', req.body);
+        let response = await apicall.put('Pet', req.body);
         console.log("response:", response);
         res.status(200).json("Succesful Update Pet")
     } catch (error) {
@@ -54,7 +54,7 @@ router.put('/:petId?', async (req, res, next) => {
 
 router.delete('/:petId', async (req, res, next) => {
     try {
-        let response = await apicall.delete('Pets', { 'id': req.params.petId });
+        let response = await apicall.delete('Pet', { 'id': req.params.petId });
         console.log("response:", response);
         res.status(200).json("Succesful Delete Pet")
     } catch (error) {
