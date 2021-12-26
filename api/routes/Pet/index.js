@@ -17,12 +17,14 @@ router.get('/:petId?', async (req, res, next) => {
 })
 
 router.post('/filter', async (req, res, next) => {
+    console.log("en bas");
     try {
         console.log("özkan");
         console.log("reqbody:",req.body);
         let response = await apicall.get('Pets', req.body)
         res.status(200).json(response)
     } catch (error) {
+        console.log("hata alıyosun");
         next(error)
     }   
 })
