@@ -7,8 +7,8 @@ module.exports = {
             if (_.isUndefined(data)) {
                 return await queryBuilder.select('*');
             } else {
-                if (_.has(data, 'first_time' && data, 'second_time')) {
-                    return await queryBuilder.whereBetween('process_date', data);
+                if (_.has(data, 'process_date')) {
+                    return await queryBuilder.whereBetween('process_date', Object.values(data.process_date));
                 } else {
                     return await queryBuilder.select('*').where(data);
                 }
