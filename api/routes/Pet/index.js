@@ -16,6 +16,15 @@ router.get('/:petId?', async (req, res, next) => {
     }
 })
 
+router.post('/filter', async (req, res, next) => {
+    try {
+        let response = await apicall.get('Pets', req.body)
+        res.status(200).json(response)
+    } catch (error) {
+        next(error)
+    }   
+})
+
 router.post('/', async (req, res, next) => {
     try {
         let response = await apicall.post('Pets', req.body);
