@@ -8,12 +8,13 @@ module.exports = {
                 const queryBuilder = new db.exec(tableName)
                 return await queryBuilder.select('*');
             } else {
-                console.log(joinData);
-                console.log("girmedi",_.isUndefined(joinData));
-
                 if (!_.isUndefined(joinData)) {
+                    let {
+                        table,
+                        pet_id
+                    } = joinData
                     const queryBuilder = new db.exec(tableName)
-                    return await queryBuilder.select('*').join('process', 'pet.id', '=', 'process.pet_id').where(data);
+                    return await queryBuilder.select('*').join(`${table}`, 'pet.id', '=', `${table}.pet_id`).where(data);
                 } else {
                     const queryBuilder = new db.exec(tableName)
                     return await queryBuilder.select('*').where(data);
