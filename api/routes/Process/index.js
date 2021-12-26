@@ -5,7 +5,7 @@ const apicall = require('../../apicall')
 router.get('/:processId?', async (req, res, next) => {
     try {
         if (req.params.processId) {
-            let response = await apicall.get('Process', { Pet_id: req.params.petId });
+            let response = await apicall.get('Process', { Pet_id: req.params.processId });
             res.status(200).json(response)
         } else {
             let response = await apicall.get('Process');

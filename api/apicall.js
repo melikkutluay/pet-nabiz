@@ -1,14 +1,23 @@
 const db = require('../api/queryBuild')
-const _ = require('lodash')
+const _ = require('lodash');
+const { response } = require('express');
 module.exports = {
-    get: async function (tableName, data) {
+    get: async function (tableName, data, joinData) {
         try {
             if (_.isUndefined(data)) {
                 const queryBuilder = new db.exec(tableName)
                 return await queryBuilder.select('*');
             } else {
-                const queryBuilder = new db.exec(tableName)
-                return await queryBuilder.select('*').where(data);
+                console.log(joinData);
+                console.log("girmedi",_.isUndefined(joinData));
+
+                if (!_.isUndefined(joinData)) {
+                    const queryBuilder = new db.exec(tableName)
+                    return await queryBuilder.select('*').join('process', 'pet.id', '=', 'process.pet_id').where(data);
+                } else {
+                    const queryBuilder = new db.exec(tableName)
+                    return await queryBuilder.select('*').where(data);
+                }
             }
         } catch (error) {
             throw new Error(error)

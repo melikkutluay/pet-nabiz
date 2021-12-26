@@ -19,13 +19,13 @@ const generatorQR = async text => {
 router.get('/:petId?', async (req, res, next) => {
     try {
         if (req.params.petId) {
-            let response = await apicall.get('pet', { id: req.params.petId });
+            let response = await apicall.get('pet', { id: req.params.petId }, { pet_id: req.params.petId, table: 'process'});
+
             let obj = {
                 pet: response[0].id,
                 human: response[0].Human_id
             }
             let code = await generatorQR(JSON.stringify(obj))
-            
             response[0].qrCode = code;
             res.status(200).json(response)
         } else {
@@ -45,7 +45,7 @@ router.post('/filter', async (req, res, next) => {
                 second_time
             } = req.body
             const rawQuery = db.queryClass
-            let response =await rawQuery.schema.raw(`select p1.process, p1.process_type, p1.process_date, p2.Name from process p1, pet p2 where p1.pet_id = p2.id and substr(process_date,7)||substr(process_date,4,2)||substr(process_date,1,2) between substr('${first_time}',7)||substr('${first_time}',4,2)||substr('${first_time}',1,2) and substr('${second_time}',7)||substr('${second_time}',4,2)||substr('${second_time}',1,2)`);
+            let response = await rawQuery.schema.raw(`select p1.process, p1.process_type, p1.process_date, p2.Name from process p1, pet p2 where p1.pet_id = p2.id and substr(process_date,7)||substr(process_date,4,2)||substr(process_date,1,2) between substr('${first_time}',7)||substr('${first_time}',4,2)||substr('${first_time}',1,2) and substr('${second_time}',7)||substr('${second_time}',4,2)||substr('${second_time}',1,2)`);
             res.status(200).json(response);
         } else {
             let response = await apicall.get('process', req.body)
