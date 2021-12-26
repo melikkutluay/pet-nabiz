@@ -19,6 +19,7 @@ router.get('/:humanId?', async (req, res, next) => {
 
 router.post('/signIn', async (req, res, next) => {
     try {
+        console.log("sign in");
         /* let response = await apicall.get('Human', req.body);
         if (_.isEmpty(response)) {
             throw new Error(400);
