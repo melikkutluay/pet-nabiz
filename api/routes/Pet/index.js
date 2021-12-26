@@ -6,10 +6,10 @@ const _ = require('lodash')
 router.get('/:petId?', async (req, res, next) => {
     try {
         if (req.params.petId) {
-            let response = await apicall.get('Pets', { id: req.params.petId });
+            let response = await apicall.get('pet', { id: req.params.petId });
             res.status(200).json(response)
         } else {
-            let response = await apicall.get('Pets');
+            let response = await apicall.get('pet');
             res.status(200).json(response)
         }
     } catch (error) {
