@@ -47,7 +47,8 @@ router.post('/signUp', async (req, res, next) => {
         if (_.isEmpty(response)) {
             throw new Error(400);
         } else {
-            res.status(200).json(response)
+            console.log("response :", response);
+            res.status(200).json("Succesful Add Human")
         }
     } catch (error) {
         next(error)
