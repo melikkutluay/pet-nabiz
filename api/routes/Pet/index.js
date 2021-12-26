@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express()
 const apicall = require('../../apicall')
+const _ = require('lodash')
 
 router.get('/:petId?', async (req, res, next) => {
     try {
@@ -18,13 +19,14 @@ router.get('/:petId?', async (req, res, next) => {
 
 router.post('/filter', async (req, res, next) => {
     try {
-        /* let body = {
-            process_date: '11.10.2021',
-            process_date: '23.12.2021'
-        } */
-        console.log("req body:",req.body);
-        let response = await apicall.get('process', req.body)
-        res.status(200).json(response)
+        if (_.has(req.body, 'first_time' && req.body, 'second_time')) {
+            console.log("aa:",req.body.first_time);
+            let response = await apicall.get('process', {process_date: [req.body.first_time, req.body.second_time]})
+            res.status(200).json(response);
+        } else {
+            let response = await apicall.get('process', req.body)
+            res.status(200).json(response)
+        }
     } catch (error) {
         next(error)
     }
@@ -32,7 +34,7 @@ router.post('/filter', async (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
     try {
-        let response = await apicall.post('Pets', req.body);
+        let response = await apicall.post('pet', req.body);
         console.log("response :", response);
         res.status(200).json("Succesful Add Pet")
     } catch (error) {
