@@ -1,5 +1,6 @@
 const express = require('express')
 const router = express()
+const db = require('./../../queryBuild')
 const apicall = require('../../apicall')
 const _ = require('lodash')
 const qrCode = require('qrcode');
@@ -38,9 +39,13 @@ router.get('/:petId?', async (req, res, next) => {
 
 router.post('/filter', async (req, res, next) => {
     try {
-        console.log("asdm");
         if (_.has(req.body, 'first_time') && _.has(req.body, 'second_time')) {
-            let response = await apicall.get('process', { process_date: req.body })
+            let {
+                first_time,
+                second_time
+            } = req.body
+            const rawQuery = db.queryClass
+            let response =await rawQuery.schema.raw(`select p1.process, p1.process_type, p1.process_date, p2.Name from process p1, pet p2 where p1.pet_id = p2.id and substr(process_date,7)||substr(process_date,4,2)||substr(process_date,1,2) between substr('${first_time}',7)||substr('${first_time}',4,2)||substr('${first_time}',1,2) and substr('${second_time}',7)||substr('${second_time}',4,2)||substr('${second_time}',1,2)`);
             res.status(200).json(response);
         } else {
             let response = await apicall.get('process', req.body)
