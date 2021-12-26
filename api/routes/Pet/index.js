@@ -40,7 +40,6 @@ router.post('/filter', async (req, res, next) => {
     try {
         console.log("asdm");
         if (_.has(req.body, 'first_time') && _.has(req.body, 'second_time')) {
-            console.log("req body :",req.body);
             let response = await apicall.get('process', { process_date: req.body })
             res.status(200).json(response);
         } else {
